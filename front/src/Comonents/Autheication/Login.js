@@ -109,8 +109,8 @@ const Login = () => {
         width='100%'
         style={{marginTop:15}}
         onClick={() =>{
-            setEmail("");
-            setPassword("");
+            setEmail("dicahity@mailinator.com");
+            setPassword("Pa$$w0rd!");
         }}
         >
             Get Guest User Credentials

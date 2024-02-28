@@ -53,7 +53,6 @@ const ProfileModel = ({ user, children }) => {
           alt={user.name}
           display='flex'
           />
-          
           <Text
           fontSize={{base:"20px", md: "20px"}}
           fontFamily="Work sans"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../../context/ChatProvider'
-import { Box, Button, Image, Stack, Text, useToast} from '@chakra-ui/react';
+import { Box, Button, Stack, Text, useToast} from '@chakra-ui/react';
 import axios from 'axios';
 import * as mod from '../../url';
 import { IoIosAddCircle } from "react-icons/io";
@@ -97,7 +97,6 @@ const MyChats = ({ fetchAgain }) => {
         {chats ? (
             <Stack  overflowY='auto' style={{
                 scrollbarColor:"black",
-                display:"flex"
             }}>
             {chats.map((chat) => (
                 <Box
@@ -107,23 +106,10 @@ const MyChats = ({ fetchAgain }) => {
                 color={selectedChat === chat ? 'white' : 'black'}
                 px={3}
                 py={2}
-                display='flex'
                 borderRadius='lg'
                 key={chat._id} 
                 >
-                <Image
-                    borderRadius='full'
-                    boxSize='40px'
-                    display='flex'
-                    src={user.pic}
-                    alt='Dan Abramov'
-                  />
-                <Text
-                 display='flex'
-                 alignItems='center'
-                 marginLeft="20px"
-
-                >
+                <Text>
                     {
                  !chat.isGroupChat ? getSender(loggedUser, chat.users)
                      : 
