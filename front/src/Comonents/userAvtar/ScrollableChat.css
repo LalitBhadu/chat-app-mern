@@ -1,0 +1,23 @@
+.messages-container {
+    overflow-y: auto;
+    max-height: 335px; 
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* Customize the scrollbar appearance */
+    /* background: #edf3ff; */
+  }
+  
+  .messages-container::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  .messages-container::-webkit-scrollbar-thumb {
+    background-color: #a0a0a0;
+    border-radius: 3px;
+  }
+  
+  @media (max-width: 600px) {
+    /* Adjust styles for screens with a maximum width of 600px (mobile) */
+    .messages-container {
+      max-height: 750px; /* Set a different maximum height for mobile screens */
+    }
+  }
