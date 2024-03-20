@@ -1,4 +1,4 @@
-import { Button, IconButton, Text, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Button, IconButton, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { GiBleedingEye } from "react-icons/gi";
 import { Image } from "@chakra-ui/react"
@@ -13,9 +13,11 @@ import {
   } from '@chakra-ui/react'
 
 
-const ProfileModel = ({ user, children }) => {
+
+const ProfileModel = ({user, children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    
 
     return (
         <>
@@ -38,7 +40,9 @@ const ProfileModel = ({ user, children }) => {
           fontFamily='Work sans'
           display='flex'
           justifyContent='center'
-          >{user.name}</ModalHeader>
+          >
+          {user.name}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody
           display="flex"
@@ -46,13 +50,15 @@ const ProfileModel = ({ user, children }) => {
           alignItems="center"
           justifyContent='space-between'
           >
-          <Image
-          borderRadius='full'
-          boxSize='50px'
-          src={user.pic}
-          alt={user.name}
-          display='flex'
-          />
+         <Image
+                size="lg"
+                cursor="pointer"
+                name={user.name}
+                // src={require(`../../img/${user?.pic}`)}
+                src={user.pic}
+                alt="User Pic" 
+                />
+
           <Text
           fontSize={{base:"20px", md: "20px"}}
           fontFamily="Work sans"
@@ -68,9 +74,8 @@ const ProfileModel = ({ user, children }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
         </>
     );
 };
 
-export default ProfileModel
+export default ProfileModel;

@@ -27,13 +27,12 @@ const UserListItem = ({user, handleFunction}) => {
             mb={2}
             borderRadius='lg'
             >
-            <Avatar
-            mr={2}
-            size='sm'
-            cursor='pointer'
-            name={user.name}
-            src={user.pic}
-            />
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={require(`./../../img/${user?.pic}`)} alt="User Pic" 
+                />
            <Box>
             <Text>{user.name}</Text>
             <Text

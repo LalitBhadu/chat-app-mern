@@ -185,15 +185,9 @@ const SiderDrawer = () => {
               <Avatar
                 size="sm"
                 cursor="pointer"
-                // name={user.name}
-                // src={require(`./../../img/${user?.pic}`)}
-                // img={user?.pic}
+                name={user.name}
+                src={require(`./../../img/${user?.pic}`)} alt="User Pic" 
               />
-              {/* img={user?.pic} */}
-              {/* <img src={require(`./../../img/${user?.pic}`)} /> */}
-              {user?.pic && (
-                <img src={require(`./../../img/${user?.pic}`)} alt="User Pic" />
-              )}
             </MenuButton>
             <MenuList>
               <ProfileModel user={user}>

@@ -93,6 +93,7 @@ const GroupChatModal = ({children}) => {
 
         const config = {
             headers:{
+              "Content-type": "application/json",
                 Authorization:`Bearer ${user.token}`,
             },
         };
@@ -104,7 +105,7 @@ const GroupChatModal = ({children}) => {
         },
         config
         );
-        // console.log(data, "group create");
+        console.log(data, "group create");
         setChats([data,...chats]);
         onClose();
         toast({

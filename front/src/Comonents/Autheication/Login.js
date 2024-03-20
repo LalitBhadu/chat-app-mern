@@ -109,7 +109,7 @@ const Login = () => {
         width='100%'
         style={{marginTop:15}}
         onClick={() =>{
-            setEmail("dicahity@mailinator.com");
+            setEmail("pavyceha@mailinator.com");
             setPassword("Pa$$w0rd!");
         }}
         >
