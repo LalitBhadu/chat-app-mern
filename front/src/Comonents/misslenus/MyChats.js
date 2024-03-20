@@ -119,7 +119,7 @@ const MyChats = ({ fetchAgain }) => {
                   <Avatar
                     size="sm"
                     cursor="pointer"
-                    src={require(`./../../img/${user?.pic}`)}
+                    src={user?.pic}
                     alt="User Pic"
                   />
                   <Text display="flex" alignItems="center" marginLeft="20px">
