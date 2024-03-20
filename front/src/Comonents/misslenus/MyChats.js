@@ -119,7 +119,8 @@ const MyChats = ({ fetchAgain }) => {
                   <Avatar
                     size="sm"
                     cursor="pointer"
-                    // src={require(`./../../img/${user?.pic}`)} alt="User Pic"
+                    src={require(`./../../img/${user?.pic}`)}
+                    alt="User Pic"
                   />
                   <Text display="flex" alignItems="center" marginLeft="20px">
                     {!chat.isGroupChat
