@@ -186,7 +186,7 @@ const SiderDrawer = () => {
                 size="sm"
                 cursor="pointer"
                 name={user.name}
-                src={require(`./../../img/${user?.pic}`)} alt="User Pic" 
+                // src={require(`./../../img/${user?.pic}`)} alt="User Pic"
               />
             </MenuButton>
             <MenuList>
