@@ -4,7 +4,7 @@ const gernateToken = require("../config/gernateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  const pic = req.file.filename;
+  const pic = req.file?.filename;
   console.log("Request Body:", { name, email, password, pic });
 
   if (
@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      pic: user.pic,
+      pic: user?.pic,
       token: gernateToken(user._id),
     });
   } else {
