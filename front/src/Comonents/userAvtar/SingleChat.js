@@ -185,7 +185,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       const handleVideoCall = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const response = await axios.post(`${mod.api_url}/initiate`, { chatId: selectedChat._id }, config);
+            const response = await axios.post(`${mod.api_url}/api/videocall/initiate`, { chatId: selectedChat._id }, config);
             console.log("Video call initiated successfully:", response.data); 
             // Handle success response, if needed
         } catch (error) {
@@ -242,6 +242,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                         </>
                     ))}
                     <Box display='flex'>
+                    
                             <IconButton icon={<FcVideoCall />} aria-label="Video Call" onClick={handleVideoCall} />
                             <IconButton icon={<FcCallback />} aria-label="Voice Call" />
                         </Box>

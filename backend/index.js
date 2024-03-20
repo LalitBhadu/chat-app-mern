@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 app.use('/api/user', userRoutes)
 app.use('/api/userchat', chatRoutes)
 app.use('/api/message', messageRoutes)
-app.use('/api/message', callRoutes)
+app.use('/api/videocall', callRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
@@ -149,13 +149,4 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('Client disconnected');
     });
-});
-
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log("MongoDB Connection Established by Admin");
-}).catch((error) => {
-    console.log("MongoDB connection Failed:", error.message);
 });
