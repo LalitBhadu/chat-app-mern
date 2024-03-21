@@ -18,6 +18,6 @@
   @media (max-width: 600px) {
     /* Adjust styles for screens with a maximum width of 600px (mobile) */
     .messages-container {
-      max-height: 750px; /* Set a different maximum height for mobile screens */
+      max-height: 600px; /* Set a different maximum height for mobile screens */
     }
   }
