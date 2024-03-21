@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import {
-  Avatar,
   Box,
   Button,
   Drawer,
@@ -7,7 +7,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Image,
   Input,
   Menu,
   MenuButton,
@@ -15,32 +14,29 @@ import {
   MenuItem,
   MenuList,
   Text,
-  Toast,
   Tooltip,
   useDisclosure,
+  Avatar,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { FaSearchengin } from "react-icons/fa";
-import { FaBell } from "react-icons/fa";
+import { FaSearchengin, FaBell } from "react-icons/fa";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
-import { ChatState } from "../../context/ChatProvider";
-import ProfileModel from "./ProfileModel";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import * as mod from "../../url";
+import { ChatState } from "../../context/ChatProvider";
 import ChatLoading from "./ChatLoading";
 import UserListItem from "../userAvtar/UserListItem";
 import { Triangle } from "react-loader-spinner";
 import { getSender } from "../../config/ChatLogic";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
+import { useToast } from "@chakra-ui/react";
 
 const SiderDrawer = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadingChat, setLoadingChat] = useState();
+  const [loadingChat, setLoadingChat] = useState(false);
   const {
     user,
     setSelectedChat,
@@ -49,16 +45,9 @@ const SiderDrawer = () => {
     notification,
     setNotification,
   } = ChatState();
-
-  console.log(notification, "notification");
-  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   const toast = useToast();
-
-  const logoutHandler = () => {
-    localStorage.removeItem("userInfo");
-    navigate("/");
-  };
 
   const handleSearch = async () => {
     if (!search) {
@@ -89,12 +78,12 @@ const SiderDrawer = () => {
       setSearchResult(data);
     } catch (error) {
       toast({
-        title: "Error Occured",
-        description: "faild to load the Search data",
+        title: "Error Occurred",
+        description: "Failed to load the search data",
         status: "error",
         duration: 2000,
         isClosable: true,
-        position: "Bottom-left",
+        position: "bottom-left",
       });
     }
   };
@@ -128,9 +117,26 @@ const SiderDrawer = () => {
         status: "error",
         duration: 3000,
         isClosable: true,
-        position: "Bottom-left",
+        position: "bottom-left",
       });
     }
+  };
+
+  useEffect(() => {
+    notification.forEach((notif) => {
+      toast({
+        title: `New Message from ${getSender(user, notif.chat.users)}`,
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    });
+  }, [notification]);
+  console.log(notification, "wwwwwwwwwwwwwwwwwwwww");
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/");
   };
 
   return (
@@ -144,7 +150,7 @@ const SiderDrawer = () => {
         p="5px 10px 5px 10px"
         borderWidth="5px"
       >
-        <Tooltip label="Serach your Freind" hasArrow placement="bottom-end">
+        <Tooltip label="Search your Friend" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <FaSearchengin />
             <Text display={{ base: "none", md: "flex" }} px="4">
@@ -175,8 +181,8 @@ const SiderDrawer = () => {
                   }}
                 >
                   {notif.chat.isGroupChat
-                    ? `new Message in ${notif.chat.chatName}`
-                    : `new Message from ${getSender(user, notif.chat.users)}`}
+                    ? `New Message in ${notif.chat.chatName}`
+                    : `New Message from ${getSender(user, notif.chat.users)}`}
                 </MenuItem>
               ))}
             </MenuList>
@@ -192,9 +198,7 @@ const SiderDrawer = () => {
               />
             </MenuButton>
             <MenuList>
-              <ProfileModel user={user}>
-                <MenuItem>My Profile</MenuItem>
-              </ProfileModel>
+              <MenuItem>My Profile</MenuItem>
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
