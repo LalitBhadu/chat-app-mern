@@ -6,6 +6,7 @@ import { Box } from "@chakra-ui/react";
 import SiderDrawer from "../Comonents/misslenus/SiderDrawer";
 import ChatBox from "../Comonents/misslenus/ChatBox";
 import MyChats from "../Comonents/misslenus/MyChats";
+import { Navigate } from "react-router-dom";
 
 const ChatPage = () => {
   const [chats, setChats] = useState([]);
@@ -26,6 +27,7 @@ const ChatPage = () => {
   // useEffect(()=>{
   //     fetchChats();
   // },[])
+
 
   return (
     <>

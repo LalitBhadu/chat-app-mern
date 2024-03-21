@@ -27,7 +27,7 @@ import io from "socket.io-client";
 import animationData from "../../animations/typing.json";
 import { FcVideoCall } from "react-icons/fc";
 import { FcCallback } from "react-icons/fc";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ENDPOINT = "http://localhost:8080";
 var socket, selectedChatCompare;
