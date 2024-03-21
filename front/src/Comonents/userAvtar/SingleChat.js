@@ -112,6 +112,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
+        console.log("send message", data);
+
 
         socket.emit("new message", data);
         setMessages([...messages, data]);
@@ -128,18 +130,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchMessages();
+  useEffect(() => {
+    fetchMessages();
 
-  //   const intervalId = setInterval(() => {
-  //     fetchMessages();
-  //   }, 500);
-  //   selectedChatCompare = selectedChat;
+    // const intervalId = setInterval(() => {
+    //   fetchMessages();
+    // }, 500);
+    selectedChatCompare = selectedChat;
 
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [selectedChat]);
+    return () => {
+      // clearInterval(intervalId);
+    };
+  }, [selectedChat]);
 
   
   useEffect(() => {
@@ -154,7 +156,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   }, [user]);
 
   useEffect(() => {
-    socket.on("new Message", (newMessageRecived) => {
+    socket.on("new message", (newMessageRecived) => {
       console.log("new Message Received:", newMessageRecived);
       if (
         !selectedChatCompare ||
