@@ -29,7 +29,7 @@ import { FcVideoCall } from "react-icons/fc";
 import { FcCallback } from "react-icons/fc";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const ENDPOINT = "https://backend-chat-app-48zx.onrender.com";
+const ENDPOINT = "http://localhost:8080";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -52,8 +52,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     },
   };
 
-  const { user, selectedChat, setSelectedChat, notification, setNotification } =
-    ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } = ChatState();
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -76,8 +75,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(false);
 
       socket.emit("join chat", selectedChat._id);
-      setSocketConnected(true);
-      socket.emit("new Message", data);
+      // setSocketConnected(true);
+      // socket.emit("new Message", data);
     } catch (error) {
       toast({
         title: "Error Occured",
@@ -90,18 +89,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
-  useEffect(() => {
-    fetchMessages();
 
-    const intervalId = setInterval(() => {
-      fetchMessages();
-    }, 1000);
-    selectedChatCompare = selectedChat;
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [selectedChat]);
 
   const sendMessage = async () => {
     // Your existing code for sending a message
@@ -125,7 +113,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           config
         );
 
-        socket.emit("new Message", data);
+        socket.emit("new message", data);
         setMessages([...messages, data]);
       } catch (error) {
         toast({
@@ -140,6 +128,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
+  // useEffect(() => {
+  //   fetchMessages();
+
+  //   const intervalId = setInterval(() => {
+  //     fetchMessages();
+  //   }, 500);
+  //   selectedChatCompare = selectedChat;
+
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, [selectedChat]);
+
+  
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
@@ -164,13 +166,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         }
       } else {
         // Here, we update the messages state with the new message
-        setMessages((prevMessages) => [...prevMessages, newMessageRecived]);
+        // setMessages((prevMessages) => [...prevMessages, newMessageRecived]);
+        setMessages([...messages, newMessageRecived]);
       }
     });
     return () => {
       socket.off("message received");
     };
   }, [notification, fetchAgain, selectedChatCompare]);
+
+
+
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -261,7 +267,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 icon={<FcVideoCall />}
                 aria-label="Video Call"
                 onClick={handleVideoCall}
-                style={{ marginLeft: "10px" }}
+                style={{ marginRight: "10px" }}
               />
               <IconButton icon={<FcCallback />} aria-label="Voice Call" />
             </Box>
@@ -291,19 +297,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </div>
             )}
 
-            <FormControl
-              id="first-name"
-              isRequired
-              display="flex"
-              marginTop="4px"
-            >
-              {istyping ? (
+            {istyping ? (
                 <div>
                   <ThreeDots
                     visible={true}
                     height="20"
                     width="40"
-                    marginLeft="10px"
+                    marginLeft="30px"
                     color="#4fa94d"
                     radius="9"
                     ariaLabel="three-dots-loading"
@@ -314,11 +314,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               ) : (
                 <></>
               )}
-
+            <FormControl
+              id="first-name"
+              isRequired
+              display="flex"
+              marginTop="4px"
+            >
               <Input
                 variant="filled"
                 bg="#E0E0E0"
-                width="90%"
+                width="100%"
                 display="flex"
                 placeholder="Enter Your Messages..."
                 onChange={typingHandler}
@@ -337,6 +342,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               >
                 Send
               </Button>
+              <Box></Box>
             </FormControl>
           </Box>
         </>

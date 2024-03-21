@@ -56,7 +56,6 @@ const ProfileModel = ({ user, children }) => {
               name={user.name}
               src={user.pic}
             />
-
             <Text
               fontSize={{ base: "20px", md: "20px" }}
               fontFamily="Work sans"
