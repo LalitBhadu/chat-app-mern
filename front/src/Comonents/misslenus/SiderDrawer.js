@@ -31,6 +31,7 @@ import { getSender } from "../../config/ChatLogic";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { useToast } from "@chakra-ui/react";
+import ProfileModel from "./ProfileModel";
 
 const SiderDrawer = () => {
   const [search, setSearch] = useState("");
@@ -198,7 +199,9 @@ const SiderDrawer = () => {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>My Profile</MenuItem>
+            <ProfileModel user={user}>
+                <MenuItem>My Profile</MenuItem>{" "}
+              </ProfileModel>
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
